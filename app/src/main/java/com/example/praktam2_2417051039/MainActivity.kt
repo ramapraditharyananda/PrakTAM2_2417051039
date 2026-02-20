@@ -32,9 +32,13 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun Greeting(
+    name: String,
+    npm: String,
+    modifier: Modifier = Modifier
+) {
     Text(
-        text = "Halo, $name saya dengan $npm siap belajar Compose!",
+        text = "Halo, $name dengan NPM $npm siap belajar Compose!",
         modifier = modifier
     )
 }
@@ -43,6 +47,9 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     PrakTAM2_2417051039Theme {
-        Greeting(name = "Android", npm = "2417051039")
+        Greeting(
+            name = "Android",
+            npm = "2417051039"
+        )
     }
 }
