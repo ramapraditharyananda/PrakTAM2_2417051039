@@ -6,12 +6,12 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -26,7 +26,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PrakTAM2_2417051039Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                Scaffold(
+                    modifier = Modifier.fillMaxSize()
+                ) { innerPadding ->
                     HomeScreen(innerPadding)
                 }
             }
@@ -37,95 +39,77 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun HomeScreen(innerPadding: PaddingValues) {
 
-    val data = ProductivitySource.dummyProductivity
+    val dataList = ProductivitySource.dummyProductivity
 
-    Column(
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(innerPadding)
-            .padding(20.dp)
+            .padding(20.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
 
-        Text(
-            text = "Deadline Risk Analyzer",
-            fontSize = 22.sp,
-            fontWeight = FontWeight.Bold
-        )
+        item {
+            Text(
+                text = "Deadline Risk Analyzer",
+                fontSize = 22.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
 
-        Spacer(modifier = Modifier.height(8.dp))
+        items(dataList) { data ->
 
-        Text(
-            text = "Halo, ${data.nama}",
-            fontSize = 16.sp
-        )
-
-        Spacer(modifier = Modifier.height(4.dp))
-
-        Text(
-            text = "NPM: ${data.npm}",
-            fontSize = 14.sp
-        )
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        Card(
-            shape = RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(
-                containerColor = Color(0xFFFFCDD2)
-            ),
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Column(
-                modifier = Modifier.padding(16.dp)
+            Card(
+                shape = RoundedCornerShape(16.dp),
+                elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
+                modifier = Modifier.fillMaxWidth()
             ) {
-                Text(
-                    text = "Risk Level: HIGH",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 18.sp
-                )
-                Spacer(modifier = Modifier.height(4.dp))
-                Text(text = "Score: 78%")
-                Text(text = "Segera kerjakan task prioritas")
+                Column(
+                    modifier = Modifier.padding(16.dp)
+                ) {
+
+                    Text(
+                        text = data.nama,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp
+                    )
+
+                    Spacer(modifier = Modifier.height(4.dp))
+
+                    Text(
+                        text = "NPM: ${data.npm}",
+                        fontSize = 14.sp
+                    )
+
+                    Spacer(modifier = Modifier.height(6.dp))
+
+                    Text(
+                        text = data.ide,
+                        fontSize = 14.sp
+                    )
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    Image(
+                        painter = painterResource(id = data.imageRes),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(180.dp),
+                        contentScale = ContentScale.Crop
+                    )
+                }
             }
         }
 
-        Spacer(modifier = Modifier.height(20.dp))
-
-        Card(
-            shape = RoundedCornerShape(16.dp),
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Column(
-                modifier = Modifier.padding(16.dp)
+        item {
+            Spacer(modifier = Modifier.height(20.dp))
+            Button(
+                onClick = { },
+                modifier = Modifier.fillMaxWidth()
             ) {
-                Text(
-                    text = "Deadline Terdekat",
-                    fontWeight = FontWeight.Bold
-                )
-                Spacer(modifier = Modifier.height(6.dp))
-                Text(text = "UI/UX Proposal")
-                Text(text = "Sisa waktu: 1 Hari 5 Jam")
+                Text("Tambah Ide")
             }
         }
-
-        Spacer(modifier = Modifier.height(20.dp))
-
-        Button(
-            onClick = { },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text(text = "Tambah Task")
-        }
-
-        Spacer(modifier = Modifier.height(30.dp))
-
-        Image(
-            painter = painterResource(id = data.imageRes),
-            contentDescription = "Productivity Image",
-            modifier = Modifier
-                .size(220.dp)
-                .align(Alignment.CenterHorizontally),
-            contentScale = ContentScale.Crop
-        )
     }
 }
