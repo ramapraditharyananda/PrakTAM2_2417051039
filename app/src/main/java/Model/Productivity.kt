@@ -1,8 +1,8 @@
 package Model
 
 data class Productivity(
-    val nama: String,
-    val npm: String,
-    val ide: String,
+    val judulTugas: String,
+    val deadline: String,
+    val hariTersisa: Int,
     val imageRes: Int
 )

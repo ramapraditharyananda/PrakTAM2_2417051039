@@ -1,43 +1,41 @@
 package Model
-
 import com.example.praktam2_2417051039.R
 
 object ProductivitySource {
-
     val dummyProductivity = listOf(
 
         Productivity(
-            nama = "Rama Praditha Ryananda",
-            npm = "2417051039",
-            ide = "Deadline Risk Analyzer",
+            judulTugas = "Pemrograman Website",
+            deadline = "10 Juni 2026",
+            hariTersisa = 1,
             imageRes = R.drawable.productivity1
         ),
 
         Productivity(
-            nama = "Rama Praditha Ryananda",
-            npm = "2417051039",
-            ide = "Task Priority Manager",
+            judulTugas = "Basis Data",
+            deadline = "12 Juni 2026",
+            hariTersisa = 3,
             imageRes = R.drawable.productivity2
         ),
 
         Productivity(
-            nama = "Rama Praditha Ryananda",
-            npm = "2417051039",
-            ide = "Study Time Tracker",
+            judulTugas = "Kalkulus",
+            deadline = "15 Juni 2026",
+            hariTersisa = 5,
             imageRes = R.drawable.productivity3
         ),
 
         Productivity(
-            nama = "Rama Praditha Ryananda",
-            npm = "2417051039",
-            ide = "Focus Session Planner",
+            judulTugas = "Matematika Diskrit",
+            deadline = "18 Juni 2026",
+            hariTersisa = 7,
             imageRes = R.drawable.productivity4
         ),
 
         Productivity(
-            nama = "Rama Praditha Ryananda",
-            npm = "2417051039",
-            ide = "Smart Reminder System",
+            judulTugas = "Logika",
+            deadline = "20 Juni 2026",
+            hariTersisa = 10,
             imageRes = R.drawable.productivity5
         )
     )
