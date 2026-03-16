@@ -3,7 +3,6 @@ package com.example.praktam2_2417051039
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -20,13 +19,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.praktam2_2417051039.ui.theme.PrakTAM2_2417051039Theme
-import Model.ProductivitySource
+import com.example.praktam2_2417051039.model.ProductivitySource
 
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
 
         setContent {
             PrakTAM2_2417051039Theme {
@@ -61,7 +59,7 @@ fun HomeScreen(innerPadding: PaddingValues) {
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
-            text = "Hi, Rama 👋",
+            text = "Hi, Rama Praditha Ryananda 👋",
             fontSize = 18.sp,
             fontWeight = FontWeight.Medium
         )
@@ -82,11 +80,8 @@ fun HomeScreen(innerPadding: PaddingValues) {
 
             items(dataList) { data ->
 
-                val statusColor = if (data.hariTersisa <= 1) {
-                    Color.Red
-                } else {
-                    Color.Gray
-                }
+                val statusColor =
+                    if (data.hariTersisa <= 1) Color.Red else Color.Gray
 
                 Card(
                     shape = RoundedCornerShape(16.dp),

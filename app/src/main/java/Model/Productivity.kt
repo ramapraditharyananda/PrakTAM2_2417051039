@@ -1,4 +1,4 @@
-package Model
+package com.example.praktam2_2417051039.model
 
 data class Productivity(
     val judulTugas: String,
