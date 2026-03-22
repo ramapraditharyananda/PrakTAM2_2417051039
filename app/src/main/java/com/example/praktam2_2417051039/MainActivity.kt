@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -42,6 +43,9 @@ class MainActivity : ComponentActivity() {
 fun HomeScreen(innerPadding: PaddingValues) {
 
     val dataList = ProductivitySource.dummyProductivity
+    val priorityList = dataList
+        .filter { it.hariTersisa <= 5 }
+        .sortedBy { it.hariTersisa }
 
     Column(
         modifier = Modifier
@@ -69,7 +73,66 @@ fun HomeScreen(innerPadding: PaddingValues) {
             fontSize = 14.sp
         )
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Text(
+            text = "PRIORITAS",
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        LazyRow(
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            items(priorityList) { data ->
+                Card(
+                    shape = RoundedCornerShape(16.dp),
+                    modifier = Modifier.width(180.dp)
+                ) {
+                    Column(
+                        modifier = Modifier.padding(8.dp)
+                    ) {
+
+                        Image(
+                            painter = painterResource(id = data.imageRes),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(100.dp),
+                            contentScale = ContentScale.Crop
+                        )
+
+                        Spacer(modifier = Modifier.height(6.dp))
+
+                        Text(
+                            text = data.judulTugas,
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+
+                        Text(
+                            text = "H-${data.hariTersisa}",
+                            fontSize = 12.sp,
+                            color = if (data.hariTersisa <= 1) Color.Red else Color.Gray,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Text(
+            text = "DAFTAR TUGAS ANDA",
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
 
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
