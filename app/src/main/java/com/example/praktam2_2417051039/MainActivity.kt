@@ -13,24 +13,22 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.example.praktam2_2417051039.ui.theme.PrakTAM2_2417051039Theme
 import com.example.praktam2_2417051039.model.ProductivitySource
+import com.example.praktam2_2417051039.ui.theme.PrakTAM2_2417051039Theme
 
 class MainActivity : ComponentActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
             PrakTAM2_2417051039Theme {
                 Scaffold(
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier.fillMaxSize(),
+                    containerColor = MaterialTheme.colorScheme.background
                 ) { innerPadding ->
                     HomeScreen(innerPadding)
                 }
@@ -56,100 +54,46 @@ fun HomeScreen(innerPadding: PaddingValues) {
 
         Text(
             text = "Deadline Risk Analyzer",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold
+            style = MaterialTheme.typography.headlineLarge,
+            color = MaterialTheme.colorScheme.primary
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(6.dp))
 
         Text(
-            text = "Hi, Rama Praditha Ryananda 👋",
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Medium
+            text = "Hi, Rama 👋",
+            style = MaterialTheme.typography.titleMedium
         )
 
         Text(
             text = "NPM: 2417051039",
-            fontSize = 14.sp
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onBackground
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         Text(
-            text = "PRIORITAS",
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold
+            text = "Prioritas",
+            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.primary
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
         LazyRow(
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            modifier = Modifier.fillMaxWidth()
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            contentPadding = PaddingValues(end = 16.dp)
         ) {
             items(priorityList) { data ->
-                Card(
-                    shape = RoundedCornerShape(16.dp),
-                    modifier = Modifier.width(180.dp)
-                ) {
-                    Column(
-                        modifier = Modifier.padding(8.dp)
-                    ) {
-
-                        Image(
-                            painter = painterResource(id = data.imageRes),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(100.dp),
-                            contentScale = ContentScale.Crop
-                        )
-
-                        Spacer(modifier = Modifier.height(6.dp))
-
-                        Text(
-                            text = data.judulTugas,
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-
-                        Text(
-                            text = "H-${data.hariTersisa}",
-                            fontSize = 12.sp,
-                            color = if (data.hariTersisa <= 1) Color.Red else Color.Gray,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
-                }
-            }
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Text(
-            text = "DAFTAR TUGAS ANDA",
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold
-        )
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-            modifier = Modifier.weight(1f)
-        ) {
-
-            items(dataList) { data ->
-
-                val statusColor =
-                    if (data.hariTersisa <= 1) Color.Red else Color.Gray
 
                 Card(
-                    shape = RoundedCornerShape(16.dp),
-                    elevation = CardDefaults.cardElevation(6.dp),
-                    modifier = Modifier.fillMaxWidth()
+                    shape = RoundedCornerShape(20.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surface
+                    ),
+                    elevation = CardDefaults.cardElevation(2.dp),
+                    modifier = Modifier.width(220.dp)
                 ) {
 
                     Column(
@@ -161,6 +105,73 @@ fun HomeScreen(innerPadding: PaddingValues) {
                             contentDescription = null,
                             modifier = Modifier
                                 .fillMaxWidth()
+                                .height(120.dp),
+                            contentScale = ContentScale.Crop
+                        )
+
+                        Spacer(modifier = Modifier.height(10.dp))
+
+                        Text(
+                            text = data.judulTugas,
+                            style = MaterialTheme.typography.titleMedium,
+                            maxLines = 2
+                        )
+
+                        Spacer(modifier = Modifier.height(4.dp))
+
+                        Text(
+                            text = "H-${data.hariTersisa}",
+                            color = if (data.hariTersisa <= 1)
+                                MaterialTheme.colorScheme.error
+                            else
+                                MaterialTheme.colorScheme.onBackground,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Text(
+            text = "Daftar Tugas",
+            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.primary
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(2),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            modifier = Modifier.weight(1f)
+        ) {
+
+            items(dataList) { data ->
+
+                val statusColor =
+                    if (data.hariTersisa <= 1)
+                        MaterialTheme.colorScheme.error
+                    else
+                        MaterialTheme.colorScheme.onBackground
+
+                Card(
+                    shape = RoundedCornerShape(20.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surface
+                    ),
+                    elevation = CardDefaults.cardElevation(2.dp)
+                ) {
+
+                    Column(modifier = Modifier.padding(12.dp)) {
+
+                        Image(
+                            painter = painterResource(id = data.imageRes),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .fillMaxWidth()
                                 .height(100.dp),
                             contentScale = ContentScale.Crop
                         )
@@ -169,30 +180,26 @@ fun HomeScreen(innerPadding: PaddingValues) {
 
                         Text(
                             text = data.judulTugas,
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 14.sp
+                            style = MaterialTheme.typography.bodyMedium,
+                            fontWeight = FontWeight.SemiBold
                         )
-
-                        Spacer(modifier = Modifier.height(4.dp))
 
                         Text(
                             text = "Deadline: ${data.deadline}",
-                            fontSize = 12.sp
+                            style = MaterialTheme.typography.bodyMedium
                         )
-
-                        Spacer(modifier = Modifier.height(4.dp))
 
                         Text(
                             text = "H-${data.hariTersisa}",
                             color = statusColor,
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 12.sp
+                            fontWeight = FontWeight.Bold
                         )
 
                         Spacer(modifier = Modifier.height(8.dp))
 
                         Button(
                             onClick = { },
+                            shape = RoundedCornerShape(12.dp),
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             Text("Lihat")
@@ -206,6 +213,7 @@ fun HomeScreen(innerPadding: PaddingValues) {
 
         Button(
             onClick = { },
+            shape = RoundedCornerShape(14.dp),
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Tambah Tugas")
