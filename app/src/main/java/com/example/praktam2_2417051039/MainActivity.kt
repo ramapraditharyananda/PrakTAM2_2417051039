@@ -76,7 +76,7 @@ fun HomeScreen(innerPadding: PaddingValues) {
             Spacer(modifier = Modifier.height(6.dp))
 
             Text(
-                text = "Hi, Rama 👋",
+                text = "Hi, Rama",
                 style = MaterialTheme.typography.titleMedium
             )
 
