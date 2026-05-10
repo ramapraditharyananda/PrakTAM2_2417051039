@@ -42,7 +42,13 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
 
+    implementation("com.google.android.gms:play-services-auth:21.2.0")
+    implementation("io.coil-kt:coil-compose:2.6.0")
     implementation("androidx.compose.material3:material3")
-
+    implementation(libs.coil.compose)
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     debugImplementation("androidx.compose.ui:ui-tooling")
+
+
 }
